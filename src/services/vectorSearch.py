@@ -19,12 +19,17 @@ def getEmbedding(word: str):
     except Exception as e:
         raise e
 
-async def search(word: str, limit: int = 30):
+async def search(word: str, limit: int = 30, filter: str = ""):
     queryVector = await getEmbedding(word)
     pipeline = [
         {
           "$vectorSearch": {
             "queryVector": queryVector,
+            "filter": {
+                "$gate": {
+                    { "직군": { "$in": filter }}
+                }
+            },
             "path": "vectorEmbedding",
             "numCandidates": 100,
             "exact": False,
