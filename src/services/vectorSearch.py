@@ -5,6 +5,7 @@ from main import client
 db_name = os.getenv('DATABASE_NAME')
 collection_name = os.getenv('COLLECTION_NAME')
 openai_key = os.getenv("OPENAI_KEY")
+vector_index_name = os.getenv('VECTOR_INDEX_NAME')
 
 database = client[f"{db_name}"]
 collection = database[f"{collection_name}"]
@@ -18,7 +19,7 @@ def getEmbedding(word: str):
     except Exception as e:
         raise e
 
-async def search(word: str, limit: int):
+async def search(word: str, limit: int = 30):
     queryVector = await getEmbedding(word)
     pipeline = [
         {
@@ -27,8 +28,8 @@ async def search(word: str, limit: int):
             "path": "vectorEmbedding",
             "numCandidates": 100,
             "exact": False,
-            "limit": 30,
-            "index": "subsidy_vector_index",
+            "limit": limit,
+            "index": f"{vector_index_name}",
           },
         },
         {
@@ -40,6 +41,8 @@ async def search(word: str, limit: int):
           },
         },
         {
-          "$limit": 30,
+          "$limit": limit,
         },
-      ]
+    ]
+    results = collection.aggregate(pipeline)
+    return list(results)
