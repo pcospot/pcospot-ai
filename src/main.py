@@ -23,6 +23,6 @@ app.add_middleware(
 )
 
 if __name__ == "__main__":
-    import services.vectorSearch as vs
-    r = vs.getEmbedding("apple")
+    import services.sprint as gs
+    gs.generateSprint("월", "금", "게시판 생성")
     uvicorn.run(app, host="0.0.0.0", port=9000)

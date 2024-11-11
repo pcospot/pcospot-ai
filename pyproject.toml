@@ -12,6 +12,7 @@ uvicorn = "^0.32.0"
 transformers = "^4.46.2"
 python-dotenv = "^1.0.1"
 pymongo = "^4.10.1"
+openai = "^1.54.3"
 
 
 [build-system]
