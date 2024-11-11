@@ -24,5 +24,5 @@ app.add_middleware(
 
 if __name__ == "__main__":
     import services.sprint as gs
-    gs.generateSprint("월", "금", "게시판 생성")
+    gs.generateSprint("월", "금", "게시판 생성", "2")
     uvicorn.run(app, host="0.0.0.0", port=9000)
