@@ -1,5 +1,4 @@
-import os
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter
 from dotenv import load_dotenv
 import services.vectorSearch as vs
 
@@ -9,6 +8,6 @@ router = APIRouter(
     prefix="/search"
 )
 
-@router.get('search')
+@router.get('/search')
 async def search(query: str = "", limit: int = 30, filter: str = "") -> list:
     return vs.search(query, limit, filter)
