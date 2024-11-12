@@ -2,11 +2,12 @@ import os
 from openai import OpenAI
 
 lm_api = os.getenv("LM_API_URI")
+api_key = os.getenv("API_KEY")
 model_id = os.getenv("MODEL_ID")
 
 client = OpenAI(
     base_url=f"{lm_api}/v1",
-    api_key="apikey"
+    api_key=f"{api_key}"
 )
 
 # 요일, 주제(할 일: ex 게시판 생성 등)를 전달받아 생성
