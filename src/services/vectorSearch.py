@@ -1,6 +1,6 @@
 import os
 import requests
-from main import client
+from utils.db import client
 
 db_name = os.getenv('DATABASE_NAME')
 collection_name = os.getenv('COLLECTION_NAME')

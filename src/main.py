@@ -1,13 +1,9 @@
 import os, uvicorn, dotenv
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-import pymongo
 from controllers import search, sprint, summarize
 
 dotenv.load_dotenv()
-
-global client
-client = pymongo.MongoClient(os.getenv('MONGO_URI'))
 
 app = FastAPI(
     title="pcospot-ai",
