@@ -2,6 +2,7 @@ import os, uvicorn, dotenv
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 import pymongo
+from controllers import search, sprint, summarize
 
 dotenv.load_dotenv()
 
@@ -21,6 +22,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(search.router)
+app.include_router(sprint.router)
+app.include_router(summarize.router)
 
 if __name__ == "__main__":
     import services.summarizeChat as sc
