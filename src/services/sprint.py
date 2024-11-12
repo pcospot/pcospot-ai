@@ -1,4 +1,4 @@
-import os, requests
+import os
 from openai import OpenAI
 
 lm_api = os.getenv("LM_API_URI")

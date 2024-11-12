@@ -1,4 +1,3 @@
-import os
 from fastapi import APIRouter
 from dotenv import load_dotenv
 import services.vectorSearch as vs

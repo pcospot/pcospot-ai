@@ -1,5 +1,4 @@
-import os
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter
 from dotenv import load_dotenv
 import services.sprint as sp
 
@@ -10,7 +9,7 @@ router = APIRouter(
 )
 
 @router.get('/generate')
-async def search(startDate: str = "월", endDate: str = "금", subject: str = "", numOfPeople: str = "1명") -> str:
+async def generate(startDate: str = "월", endDate: str = "금", subject: str = "", numOfPeople: str = "1명") -> str:
     return sp.generateSprint(startDate, endDate, subject, numOfPeople) if subject else "스프린트 주제가 주어지지 않아 생성할 수 없어요."
 
 @router.get('/advice')
