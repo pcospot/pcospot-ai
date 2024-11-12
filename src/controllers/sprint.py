@@ -6,7 +6,7 @@ import services.sprint as sp
 load_dotenv()
 
 router = APIRouter(
-    prefix="/search"
+    prefix="/sprint"
 )
 
 @router.get('generate')
