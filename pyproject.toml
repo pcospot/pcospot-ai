@@ -13,6 +13,8 @@ transformers = "^4.46.2"
 python-dotenv = "^1.0.1"
 pymongo = "^4.10.1"
 openai = "^1.54.3"
+torch = "^2.5.1"
+nltk = "^3.9.1"
 
 
 [build-system]
