@@ -40,7 +40,7 @@ def sprintSupport(elapsedDate: int, lastDate: int, sprintData: str) -> str:
                 {"role": "user", "content": f"스프린트 시작 후 경과일: {elapsedDate}일, 잔여 기간: {lastDate}일, 스프린트 정보: {sprintData}. "}
             ],
             temperature=0.6,
-            max_tokens=200
+            max_tokens=70
         )
         print(completion.choices[0].message.content)
         return completion.choices[0].message.content

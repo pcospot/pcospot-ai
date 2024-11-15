@@ -40,8 +40,7 @@ async def search(word: str, limit: int = 30, filter: str = ""):
         {
           "$project": {
             "_id": 0,
-            "articleId": 1,
-            "articleTitle": 1,
+            "recruitmentId": 1,
             "score": { "$meta": "vectorSearchScore" },
           },
         },
