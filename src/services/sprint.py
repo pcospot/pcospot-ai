@@ -2,11 +2,15 @@ import os
 from openai import OpenAI
 
 lm_api = os.getenv("LM_API_URI")
+api_key = os.getenv("API_KEY")
 model_id = os.getenv("MODEL_ID")
 
+# Local LM 여부를 확인합니다.
 client = OpenAI(
     base_url=f"{lm_api}/v1",
-    api_key="apikey"
+    api_key=f"{api_key}"
+) if lm_api else OpenAI(
+    api_key = f"{api_key}"
 )
 
 # 요일, 주제(할 일: ex 게시판 생성 등)를 전달받아 생성
@@ -28,13 +32,15 @@ def generateSprint(startDate: str, endDate: str, subject: str, numOfPeople: str)
 # parameter로 스프린트 시작 후 경과일, 스프린트 관련 정보를 입력받습니다.
 def sprintSupport(elapsedDate: int, lastDate: int, sprintData: str) -> str:
     try:
+        # maximum output
         completion = client.chat.completions.create(
             model=f"{model_id}",
             messages=[
                 {"role": "system", "content": "너는 한 조직의 스프린트 감독관이야. 주어진 스프린트 상황에 맞는 피드백을 단 한 줄로 해야 해. 잊지 마. 단 한 줄로 작성해야 해."},
                 {"role": "user", "content": f"스프린트 시작 후 경과일: {elapsedDate}일, 잔여 기간: {lastDate}일, 스프린트 정보: {sprintData}. "}
             ],
-            temperature=0.6
+            temperature=0.6,
+            max_tokens=200
         )
         print(completion.choices[0].message.content)
         return completion.choices[0].message.content
